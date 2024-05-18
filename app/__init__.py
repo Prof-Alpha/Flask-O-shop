@@ -46,7 +46,7 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
-	items = Item.query.all()
+	items = Item.query.all() #this type of fetchAll is not good for Commercial ones.
 	return render_template("home.html", items=items)
 
 @app.route("/login", methods=['POST', 'GET'])
