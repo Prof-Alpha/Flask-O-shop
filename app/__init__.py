@@ -51,11 +51,17 @@ def home():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
+	# if session['email'] == request.form['email'] :
+		# return redirect(url_for...
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
 	form = LoginForm()
 	if form.validate_on_submit():
 		email = form.email.data
+		# get the user info with his email:
+		# sql = 'select * from users_tbl where email=%s'
+		# cursor.execute(sql, request.form['email'] )
+		# result_user = cursor.fetchone()
 		user = User.query.filter_by(email=email).first()
 		if user == None:
 			flash(f'User with email {email} doesn\'t exist!<br> <a href={url_for("register")}>Register now!</a>', 'error')
